@@ -1,5 +1,7 @@
-var makeBlinkyDancer = function(top, left, timeBetweenSteps){
+var makeKevinDancer = function(top, left, timeBetweenSteps){
   makeDancer.call(this, top, left, timeBetweenSteps);
+  this.$node = $('<span class="kevinDance"></span>');
+  this.setPosition(top, left);
   // we plan to overwrite the step function below, but we still want the superclass step behavior to work,
   // so we must keep a copy of the old version of this function
 
@@ -9,18 +11,10 @@ var makeBlinkyDancer = function(top, left, timeBetweenSteps){
     // other effects you can use on a jQuery-wrapped html tag.
 };
 
-makeBlinkyDancer.prototype = Object.create(makeDancer.prototype);
-makeBlinkyDancer.prototype.constructor = makeBlinkyDancer;
+makeKevinDancer.prototype = Object.create(makeDancer.prototype);
+makeKevinDancer.prototype.constructor = makeKevinDancer;
 
-makeBlinkyDancer.prototype.step = function() {
+makeKevinDancer.prototype.step = function() {
   makeDancer.prototype.step.apply(this);
-  this.$node.toggle();
-};
-makeBlinkyDancer.prototype.lineUp = function() {
-  var numOfDancers = dancers.length;
-  for (var i = 0; i < dancers.length; i++) {
-    if (dancers[i] === makeBlinkDancer) {
-      dancers[i].setPosition(100,(i+1)/numOfDancers * $("body").width())
-    }
-  }
+  // this.$node.toggle();
 };
