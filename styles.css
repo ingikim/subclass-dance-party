@@ -33,17 +33,11 @@ body, a:link, a:visited, a:active{
   position:absolute;
 }
 .ingiDance {
-  border:10px solid blue;
-  border-radius:10px;
   position:absolute;
 }
 .kevinDance {
-  border:10px solid yellow;
-  border-radius:10px;
   position:absolute;
 }
 .coupleEnlarge {
-  border:70px solid;
-  border-radius:70px;
   position:absolute;
 }

@@ -4,34 +4,36 @@ $(document).ready(function(){
   $(".lineUp").on("click", function(){
     var numOfDancers = dancers.length;
     for (var i = 0; i < dancers.length; i++) {
-      dancers[i].setPosition($("body").height() * 0.5,(i+1)/numOfDancers * $("body").width());
+      dancers[i].setPosition($("body").height() * 0.5,(i+1)/numOfDancers * ($("body").width() -480));
    }
   });
+
+
 
   var calledOnce = false;
   $(".coupleDance").on("click", function(){
     if (!calledOnce){
       var shortestDistance = Math.sqrt(Math.pow((dancers[0].$node.position().top - dancers[1].$node.position().top),2) +  Math.pow((dancers[0].$node.position().left - dancers[1].$node.position().left),2));
       var closestCouple = [0, 1];
-      console.log(closestCouple);
       for (var i = 0; i < dancers.length; i++) {
         for (var j=i+1; j < dancers.length; j++) {
           if (Math.sqrt(Math.pow((dancers[i].$node.position().top - dancers[j].$node.position().top),2) +  Math.pow((dancers[i].$node.position().left - dancers[j].$node.position().left),2)) < shortestDistance){
             closetCouple = [i, j];
+            shortestDistance = Math.sqrt(Math.pow((dancers[i].$node.position().top - dancers[j].$node.position().top),2) +  Math.pow((dancers[i].$node.position().left - dancers[j].$node.position().left),2));
           }
         }
       }
-      console.log(closetCouple);
       if(closetCouple === undefined) {
         var closetCouple = [0, 1];
       }
-      dancers[closetCouple[0]].setPosition($("body").height() * 0.5, $("body").width() * 0.4);
-      dancers[closetCouple[1]].setPosition($("body").height() * 0.5, $("body").width() * 0.6);
+      dancers[closetCouple[0]].setPosition($("body").height() * 0.2, $("body").width() * 0.47);
+      dancers[closetCouple[1]].setPosition($("body").height() * 0.2, $("body").width() * 0.53);
 
       dancers[closetCouple[0]].$node.addClass("coupleEnlarge");
       dancers[closetCouple[1]].$node.addClass("coupleEnlarge");
       calledOnce = true;
     }
+    $(".coupleDance").hide();
   })
 
   $(".addDancerButton").on("click", function(event){
@@ -49,15 +51,27 @@ $(document).ready(function(){
      * to the stage.
      */
     var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
+    var imgHeight = Number($(this).data("img-height"));
+    var imgWidth = Number($(this).data("img-width"));
 
     // get the maker function for the kind of dancer we're supposed to make
     var dancerMakerFunction = window[dancerMakerFunctionName];
 
     // make a dancer with a random position
+    var height = $("body").height() * Math.random();
+    var width = $("body").width() * Math.random();
+
+    if(height + imgHeight > $("body").height()) {
+      height = height - imgHeight;
+    }
+
+    if(width + imgWidth > $("body").width()) {
+      width = width - imgWidth;
+    }
 
     var dancer = new dancerMakerFunction(
-      $("body").height() * Math.random(),
-      $("body").width() * Math.random(),
+      height,
+      width,
       Math.random() * 1000
     );
     $('body').append(dancer.$node);
