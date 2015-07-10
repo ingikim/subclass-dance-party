@@ -16,7 +16,7 @@ body {
 body, a:link, a:visited, a:active{
   color: lightblue;
 }
-.title, .addDancerButton, .lineUp, .coupleDance{
+.title, .addDancerButton, .lineUp, .coupleDance, .changeBackground{
   padding:5px 12px;
   float:right;
 }
@@ -27,17 +27,17 @@ body, a:link, a:visited, a:active{
 .title{
   background-color: #777;
 }
-.dancer{
-  border:10px solid red;
-  border-radius:10px;
+.dancer, .blinkyDancer{
+  border:30px solid red;
+  border-radius:30px;
   position:absolute;
 }
-.ingiDance {
-  position:absolute;
+.blinkyDancer{
+  -webkit-transition: border-color 0.2s ease-out;
+  -moz-transition: border-color 0.2s ease-out;
+  -o-transition: border-color 0.2s ease-out;
+  transition: border-color 0.2s ease-out;
 }
-.kevinDance {
-  position:absolute;
-}
-.coupleEnlarge {
+.ingiDance, .kevinDance, .coupleEnlarge{
   position:absolute;
 }

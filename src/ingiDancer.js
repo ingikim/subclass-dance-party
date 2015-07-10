@@ -17,5 +17,4 @@ makeIngiDancer.prototype.constructor = makeIngiDancer;
 
 makeIngiDancer.prototype.step = function() {
   makeDancer.prototype.step.apply(this);
-  // this.$node.toggle();
 };

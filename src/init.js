@@ -1,10 +1,23 @@
 $(document).ready(function(){
   window.dancers = [];
 
+  var currentBackground = "images/danceFloor.jpg";
+  $(".changeBackground").on("click", function(){
+    var backgrounds = ["images/adventureTimeBackground.jpg", "images/danceFloor.jpg"]
+    if(currentBackground === backgrounds[1]) {
+      currentBackground = backgrounds[0];
+      $('body').css('background-image','url("images/adventureTimeBackground.jpg")');
+    } else {
+      currentBackground = backgrounds[1];
+      $('body').css('background-image','url("images/danceFloor.jpg")');
+    }
+
+  });
+
   $(".lineUp").on("click", function(){
     var numOfDancers = dancers.length;
     for (var i = 0; i < dancers.length; i++) {
-      dancers[i].setPosition($("body").height() * 0.5,(i+1)/numOfDancers * ($("body").width() -480));
+      dancers[i].setPosition($(window).height() * 0.5,(i+1)/numOfDancers * ($(window).width() -480));
    }
   });
 
@@ -26,8 +39,8 @@ $(document).ready(function(){
       if(closetCouple === undefined) {
         var closetCouple = [0, 1];
       }
-      dancers[closetCouple[0]].setPosition($("body").height() * 0.2, $("body").width() * 0.47);
-      dancers[closetCouple[1]].setPosition($("body").height() * 0.2, $("body").width() * 0.53);
+      dancers[closetCouple[0]].setPosition($(window).height() * 0.2, $(window).width() * 0.47);
+      dancers[closetCouple[1]].setPosition($(window).height() * 0.2, $(window).width() * 0.53);
 
       dancers[closetCouple[0]].$node.addClass("coupleEnlarge");
       dancers[closetCouple[1]].$node.addClass("coupleEnlarge");
@@ -58,21 +71,21 @@ $(document).ready(function(){
     var dancerMakerFunction = window[dancerMakerFunctionName];
 
     // make a dancer with a random position
-    var height = $("body").height() * Math.random();
-    var width = $("body").width() * Math.random();
+    var height = $(window).height() * Math.random();
+    var width = $(window).width() * Math.random();
 
-    if(height + imgHeight > $("body").height()) {
+    if(height + imgHeight > $(window).height()) {
       height = height - imgHeight;
     }
 
-    if(width + imgWidth > $("body").width()) {
+    if(width + imgWidth > $(window).width()) {
       width = width - imgWidth;
     }
 
     var dancer = new dancerMakerFunction(
       height,
       width,
-      Math.random() * 1000
+      Math.random() * 1000 + 1000
     );
     $('body').append(dancer.$node);
     dancers.push(dancer);
